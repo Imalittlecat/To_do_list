@@ -46,6 +46,13 @@ button {
     width: 400px;
     padding: 10px;
     cursor: pointer;
+    transition: 0.5s ease;
+}
+
+button:hover {
+    background-color: #074b83;
+    color: #fff;
+    transition: 0.5s ease;
 }
 
 .todo {
@@ -76,7 +83,6 @@ input[type="checkbox"], label {
 input[type="checkbox"] + label:before {
     content: '';
     background: #1ba39c;
-    border-radius: 5px;
     border: 2px solid #ddd;
     display: inline-block;
     vertical-align: middle;
@@ -95,6 +101,5 @@ input[type="checkbox"]:checked + label:before {
     border: solid blue;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
-    border-radius: 0;
     margin: 0 15px 5px 5px;
 }
