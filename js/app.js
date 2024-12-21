@@ -23,5 +23,28 @@ addButton.addEventListener('click', function () {
 })
 
 function displayMessages() {
+    let displayMessage = ''
+
+    if (todoList.length === 0)  todo.innerHTML = 'No messages'
     
-}
+    todoList.forEach((item, i) => {
+        displayMessage += `
+            <li>
+                <input type="checkbox" id="item_${i}" ${
+            item.checked ? 'checked' : ''
+        }>
+                <label for="item_${i}" class="${i}" ${
+            item.important ? 'important' : ''   
+        }">
+                ${item.todo}</label>
+
+                <img class = 'delete' src="./icons/delete.png" alt="delete">
+            </li>
+        `
+        todo.innerHTML = displayMessage
+    })
+} 
+
+todo.addEventListener('change', (event) => {
+    
+})
