@@ -1,7 +1,6 @@
 let addMessage = document.querySelector('.message')
 let addButton = document.querySelector('.add')
 let todo = document.querySelector('.todo')
-let del = document.querySelector('.delete')
 let todoList = []
 
 if (localStorage.getItem('todo')) {
@@ -25,7 +24,7 @@ addButton.addEventListener('click', function () {
 function displayMessages() {
     let displayMessage = ''
 
-    if (todoList.length === 0)  todo.innerHTML = 'No messages'
+    if (todoList.length === 0)  todo.innerHTML = 'Задач нет'
     
     todoList.forEach((item, i) => {
         displayMessage += `
@@ -42,6 +41,7 @@ function displayMessages() {
             </li>
         `
         todo.innerHTML = displayMessage
+        delTask()
     })
 } 
 
@@ -74,7 +74,17 @@ todo.addEventListener('contextmenu', (event) => {
     })
 })
 
-//del.addEventListener('click', () => this.delElem.parentElement.remove())
+function delTask() {
+    const deleteButtons = document.querySelectorAll('.delete')
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const index = event.target.dataset.index
+            todoList.splice(index, 1)
+            localStorage.setItem('todo', JSON.stringify(todoList))
+            displayMessages()
+        })
+    })
+}
 
 // const todoListCons = JSON.parse(localStorage.getItem('todo'))
 // console.log(localStorage.getItem('todo'))

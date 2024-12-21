@@ -37,13 +37,13 @@ h1 {
 }
 
 input[type="text"] {
-    width: 376px;
+    width: 430px;
     padding: 10px;
 }
 
 button {
     margin-top: 20px;
-    width: 400px;
+    width: 455px;
     padding: 10px;
     cursor: pointer;
     transition: 0.5s ease;
@@ -57,6 +57,7 @@ button:hover {
 }
 
 .todo {
+    text-align: center;
     padding-left: 0;
 }
 
