@@ -60,6 +60,15 @@ button:hover {
     padding-left: 0;
 }
 
+.todo li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    word-break: break-all;
+}
+
 .todo li:not(:last-child) {
     border-bottom: 1px solid #000;
 }

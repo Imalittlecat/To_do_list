@@ -76,6 +76,6 @@ todo.addEventListener('contextmenu', (event) => {
 
 //del.addEventListener('click', () => this.delElem.parentElement.remove())
 
-//const todoListCons = JSON.parse(localStorage.getItem('todo'))
-//console.log(localStorage.getItem('todo'))
-//console.log(todoListCons)
+// const todoListCons = JSON.parse(localStorage.getItem('todo'))
+// console.log(localStorage.getItem('todo'))
+// console.log(todoListCons)
