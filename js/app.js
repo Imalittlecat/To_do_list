@@ -33,6 +33,29 @@ function setImportant() {
     })
 }
 
+function setTask() {
+    if (!addMessage.value) return
+
+    let newTodo = {
+        todo: addMessage.value,
+        checked: false,
+        important: false
+    }
+
+    todoList.push(newTodo)
+    localStorage.setItem('todo', JSON.stringify(todoList))
+    displayMessages()
+    addMessage.value = ''
+}
+
+addButton.addEventListener('click', () => setTask())
+addMessage.addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') {
+        e.preventDefault()
+        setTask()
+    }
+})
+
 function delTask() {
     const deleteButtons = document.querySelectorAll('.delete')
     deleteButtons.forEach(button => {
@@ -129,10 +152,8 @@ function displayMessages() {
     editTask()
 } 
 
+todo.addEventListener("contextmenu", (event) => event.preventDefault())
 
-
-
-
-// const todoListCons = JSON.parse(localStorage.getItem('todo'))
-// console.log(localStorage.getItem('todo'))
-// console.log(todoListCons)
+const todoListCons = JSON.parse(localStorage.getItem('todo'))
+console.log("localStorage.getItem('todo')", localStorage.getItem('todo'))
+console.log("todoListCons", todoListCons)
