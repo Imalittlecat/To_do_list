@@ -45,6 +45,54 @@ function delTask() {
     })
 }
 
+function editTask() {
+    const editButtons = document.querySelectorAll('.edit')
+
+    editButtons.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            const index = event.target.dataset.index
+
+            const taskElement = event.target.closest('li')
+
+            const label = taskElement.querySelector('label')
+
+            const input = document.createElement('input')
+
+            input.type = 'text'
+            input.value = todoList[index].todo
+            input.className = 'edit-input'
+            input.style.width = '70%'
+            input.style.padding = '5px'
+            input.style.margin = '5px'
+        
+            label.style.display = 'none'
+            taskElement.insertBefore(input, label)
+            input.focus()
+
+            input.addEventListener('blur', () => {
+                saveChanges(input, label, index)
+            })
+
+            input.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    saveChanges(input, label, index)
+                }
+            })
+        })
+    })
+}
+
+function saveChanges(input, label, index) {
+    const newText = input.value.trim()
+    if (newText) {
+        todoList[index].todo = newText
+        label.textContent = newText
+        localStorage.setItem('todo', JSON.stringify(todoList))
+    }
+    label.style.display = ''
+    input.remove()
+}
+
 // Функция для отображения всех задач
 function displayMessages() {
     // Если массив задач пуст, показываем сообщение 'Задач нет'
@@ -78,13 +126,12 @@ function displayMessages() {
     todo.innerHTML = displayMessage
     delTask()
     setImportant()
+    editTask()
 } 
 
 
 
-function editTask() {
 
-}
 
 // const todoListCons = JSON.parse(localStorage.getItem('todo'))
 // console.log(localStorage.getItem('todo'))
