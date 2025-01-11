@@ -96,8 +96,8 @@ function editTask() {
                 saveChanges(input, label, index)
             })
 
-            input.addEventListener('keyup', (e) => {
-                if (e.key === 'Enter') {
+            input.addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
                     saveChanges(input, label, index)
                 }
             })
