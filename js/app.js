@@ -116,6 +116,20 @@ function saveChanges(input, label, index) {
     input.remove()
 }
 
+function setCheckboxHandler() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]')
+
+    checkboxes.forEach((checkbox, index) => {
+        checkbox.addEventListener('change', (event) => {
+            const index = event.target.id.split('_')[1]
+
+            todoList[index].checked = event.target.checked
+
+            localStorage.setItem('todo', JSON.stringify(todoList))
+        })
+    })
+}
+
 // Функция для отображения всех задач
 function displayMessages() {
     // Если массив задач пуст, показываем сообщение 'Задач нет'
@@ -150,6 +164,7 @@ function displayMessages() {
     delTask()
     setImportant()
     editTask()
+    setCheckboxHandler()
 } 
 
 todo.addEventListener("contextmenu", (event) => event.preventDefault())
