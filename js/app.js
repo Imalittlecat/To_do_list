@@ -59,48 +59,52 @@ function editTask() {
     const editButtons = document.querySelectorAll('.edit')
 
     editButtons.forEach(btn => {
-        btn.addEventListener('click', (event) => {
+
+        const newBtn = btn.cloneNode(true)
+
+        btn.parentNode.replaceChild(newBtn, btn)
+
+        newBtn.addEventListener('click', (event) => {
             const index = event.target.dataset.index
 
             const taskElement = event.target.closest('li')
 
             const label = taskElement.querySelector('label')
 
+            if (taskElement.querySelector('.edit-input')) return
+
             const input = document.createElement('input')
 
             input.type = 'text'
             input.value = todoList[index].todo
             input.className = 'edit-input'
-            input.style.width = '70%'
-            input.style.padding = '5px'
-            input.style.margin = '5px'
         
-            label.style.display = 'none'
             taskElement.insertBefore(input, label)
+            label.style.display = 'none'
             input.focus()
 
-            input.addEventListener('blur', () => {
-                saveChanges(input, label, index)
-            })
+            const handleSave = () => {
+                const newText = input.value.trim()
+
+                if (newText && label) {
+                    todoList[index].todo = newText
+                    label.textContent = newText
+                    localStorage.setItem('todo', JSON.stringify(todoList))
+                }
+                if (label && label.parentNode) label.style.display = ''
+
+                if (input && input.parentNode) input.remove()
+            }
+
+            input.addEventListener('blur', () =>  setTimeout(handleSave, 100))
 
             input.addEventListener('keyup', (event) => {
                 if (event.key === 'Enter') {
-                    saveChanges(input, label, index)
+                    handleSave()
                 }
             })
         })
     })
-}
-
-function saveChanges(input, label, index) {
-    const newText = input.value.trim()
-    if (newText) {
-        todoList[index].todo = newText
-        label.textContent = newText
-        localStorage.setItem('todo', JSON.stringify(todoList))
-    }
-    label.style.display = ''
-    input.remove()
 }
 
 function setCheckboxHandler() {
