@@ -8,19 +8,6 @@ if (localStorage.getItem('todo')) {
     displayMessages()
 }
 
-addButton.addEventListener('click', function () {
-    if (!addMessage.value) return 
-    let newTodo = {
-        todo: addMessage.value,
-        checked: false,
-        import: false
-    } 
-    todoList.push(newTodo)
-    displayMessages()
-    localStorage.setItem('todo', JSON.stringify(todoList))
-    addMessage.value = ''
-})
-
 function setImportant() {
     const importantButtons = document.querySelectorAll('.important-btn')
     importantButtons.forEach((btn) => {
